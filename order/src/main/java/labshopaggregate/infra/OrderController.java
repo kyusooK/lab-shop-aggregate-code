@@ -21,6 +21,23 @@ public class OrderController {
     OrderRepository orderRepository;
 
     @RequestMapping(
+        value = "/orders/placeorder",
+        method = RequestMethod.POST,
+        produces = "application/json;charset=UTF-8"
+    )
+    public Order placeOrder(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        @RequestBody PlaceOrderCommand placeOrderCommand
+    ) throws Exception {
+        System.out.println("##### /order/placeOrder  called #####");
+        Order order = new Order();
+        order.placeOrder(placeOrderCommand);
+        orderRepository.save(order);
+        return order;
+    }
+
+    @RequestMapping(
         value = "/orders/{id}/modifyorder",
         method = RequestMethod.PUT,
         produces = "application/json;charset=UTF-8"

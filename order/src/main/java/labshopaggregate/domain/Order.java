@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.*;
 import labshopaggregate.OrderApplication;
-import labshopaggregate.domain.OrderPlaced;
 import lombok.Data;
 
 @Entity
@@ -36,12 +35,6 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @PostPersist
-    public void onPostPersist() {
-        OrderPlaced orderPlaced = new OrderPlaced(this);
-        orderPlaced.publishAfterCommit();
-    }
-
     public static OrderRepository repository() {
         OrderRepository orderRepository = OrderApplication.applicationContext.getBean(
             OrderRepository.class
@@ -49,6 +42,15 @@ public class Order {
         return orderRepository;
     }
 
+    //<<< Clean Arch / Port Method
+    public void placeOrder(PlaceOrderCommand placeOrderCommand) {
+        //implement business logic here:
+
+        OrderPlaced orderPlaced = new OrderPlaced(this);
+        orderPlaced.publishAfterCommit();
+    }
+
+    //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public void modifyOrder(ModifyOrderCommand modifyOrderCommand) {
         //implement business logic here:
