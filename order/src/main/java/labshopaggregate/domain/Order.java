@@ -1,5 +1,6 @@
 package labshopaggregate.domain;
 
+import java.util.ArrayList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
 import java.util.Date;
@@ -50,7 +51,7 @@ public class Order {
         this.inventoryId = placeOrderCommand.getInventoryId();
         this.address = placeOrderCommand.getAddress();
         this.orderItems = placeOrderCommand.getOrderItems();
-        this.orderStatus = OrderStatus.PLACED;
+        this.orderStatus = placeOrderCommand.getOrderStatus();
     
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
