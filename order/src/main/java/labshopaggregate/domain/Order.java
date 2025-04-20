@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.*;
 import labshopaggregate.OrderApplication;
-import labshopaggregate.domain.OrderCanceled;
 import labshopaggregate.domain.OrderPlaced;
 import lombok.Data;
 
@@ -41,9 +40,6 @@ public class Order {
     public void onPostPersist() {
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
-
-        OrderCanceled orderCanceled = new OrderCanceled(this);
-        orderCanceled.publishAfterCommit();
     }
 
     public static OrderRepository repository() {
@@ -52,5 +48,15 @@ public class Order {
         );
         return orderRepository;
     }
+
+    //<<< Clean Arch / Port Method
+    public void modifyOrder(ModifyOrderCommand modifyOrderCommand) {
+        //implement business logic here:
+
+        OrderModified orderModified = new OrderModified(this);
+        orderModified.publishAfterCommit();
+    }
+    //>>> Clean Arch / Port Method
+
 }
 //>>> DDD / Aggregate Root
