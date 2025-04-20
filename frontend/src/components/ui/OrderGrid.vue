@@ -18,6 +18,15 @@
                 <v-btn :disabled="!selectedRow" style="margin-left: 5px;" @click="openEditDialog()" class="contrast-primary-text" small color="primary">
                     <v-icon small>mdi-pencil</v-icon>수정
                 </v-btn>
+                <v-btn style="margin-left: 5px;" @click="placeOrderDialog = true" class="contrast-primary-text" small color="primary" >
+                    <v-icon small>mdi-minus-circle-outline</v-icon>place order
+                </v-btn>
+                <v-dialog v-model="placeOrderDialog" width="500">
+                    <PlaceOrder
+                        @closeDialog="placeOrderDialog = false"
+                        @placeOrder="placeOrder"
+                    ></PlaceOrder>
+                </v-dialog>
                 <v-btn :disabled="!selectedRow" style="margin-left: 5px;" @click="modifyOrderDialog = true" class="contrast-primary-text" small color="primary" :disabled="!hasRole('customer')">
                     <v-icon small>mdi-minus-circle-outline</v-icon>modify order
                 </v-btn>
@@ -158,11 +167,28 @@ export default {
     },
     data: () => ({
         path: 'orders',
+        placeOrderDialog: false,
         modifyOrderDialog: false,
     }),
     watch: {
     },
     methods:{
+        async placeOrder(params){
+            try{
+                var path = "placeOrder".toLowerCase();
+                var temp = await this.repository.invoke(this.selectedRow, path, params)
+                // 스넥바 관련 수정 필요
+                // this.$EventBus.$emit('show-success','place order 성공적으로 처리되었습니다.')
+                for(var i = 0; i< this.value.length; i++){
+                    if(this.value[i] == this.selectedRow){
+                        this.value[i] = temp.data
+                    }
+                }
+                this.placeOrderDialog = false
+            }catch(e){
+                console.log(e)
+            }
+        },
         async modifyOrder(params){
             try{
                 var path = "modifyOrder".toLowerCase();

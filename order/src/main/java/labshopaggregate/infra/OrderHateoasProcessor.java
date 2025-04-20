@@ -14,6 +14,11 @@ public class OrderHateoasProcessor
     public EntityModel<Order> process(EntityModel<Order> model) {
         model.add(
             Link
+                .of(model.getRequiredLink("self").getHref() + "/placeorder")
+                .withRel("placeorder")
+        );
+        model.add(
+            Link
                 .of(model.getRequiredLink("self").getHref() + "/modifyorder")
                 .withRel("modifyorder")
         );
