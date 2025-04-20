@@ -18,6 +18,15 @@
                 <v-btn :disabled="!selectedRow" style="margin-left: 5px;" @click="openEditDialog()" class="contrast-primary-text" small color="primary">
                     <v-icon small>mdi-pencil</v-icon>수정
                 </v-btn>
+                <v-btn :disabled="!selectedRow" style="margin-left: 5px;" @click="modifyOrderDialog = true" class="contrast-primary-text" small color="primary" :disabled="!hasRole('customer')">
+                    <v-icon small>mdi-minus-circle-outline</v-icon>modify order
+                </v-btn>
+                <v-dialog v-model="modifyOrderDialog" width="500">
+                    <ModifyOrder
+                        @closeDialog="modifyOrderDialog = false"
+                        @modifyOrder="modifyOrder"
+                    ></ModifyOrder>
+                </v-dialog>
             </div>
             <div class="mb-5 text-lg font-bold"></div>
             <div class="table-responsive">
@@ -149,10 +158,27 @@ export default {
     },
     data: () => ({
         path: 'orders',
+        modifyOrderDialog: false,
     }),
     watch: {
     },
     methods:{
+        async modifyOrder(params){
+            try{
+                var path = "modifyOrder".toLowerCase();
+                var temp = await this.repository.invoke(this.selectedRow, path, params)
+                // 스넥바 관련 수정 필요
+                // this.$EventBus.$emit('show-success','modify order 성공적으로 처리되었습니다.')
+                for(var i = 0; i< this.value.length; i++){
+                    if(this.value[i] == this.selectedRow){
+                        this.value[i] = temp.data
+                    }
+                }
+                this.modifyOrderDialog = false
+            }catch(e){
+                console.log(e)
+            }
+        },
     }
 }
 
