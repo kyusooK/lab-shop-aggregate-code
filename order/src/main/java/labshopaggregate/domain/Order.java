@@ -44,8 +44,14 @@ public class Order {
 
     //<<< Clean Arch / Port Method
     public void placeOrder(PlaceOrderCommand placeOrderCommand) {
-        //implement business logic here:
-
+        // Set order details from command
+        this.userId = placeOrderCommand.getUserId();
+        this.qty = placeOrderCommand.getQty();
+        this.inventoryId = placeOrderCommand.getInventoryId();
+        this.address = placeOrderCommand.getAddress();
+        this.orderItems = placeOrderCommand.getOrderItems();
+        this.orderStatus = OrderStatus.PLACED;
+    
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
     }
@@ -53,7 +59,14 @@ public class Order {
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public void modifyOrder(ModifyOrderCommand modifyOrderCommand) {
-        //implement business logic here:
+        repository().findById(this.getId()).ifPresent(order -> {
+            // ModifyOrderCommand에서 전달받은 orderItems가 null이 아닌 경우에만 처리
+            if (modifyOrderCommand.getOrderItems() != null) {
+                // 기존 orderItems를 새로운 orderItems로 교체
+                order.orderItems = new ArrayList<>(modifyOrderCommand.getOrderItems());
+            }
+            repository().save(order);
+        });
 
         OrderModified orderModified = new OrderModified(this);
         orderModified.publishAfterCommit();
