@@ -45,7 +45,7 @@ public class Order {
 
     //<<< Clean Arch / Port Method
     public void placeOrder(PlaceOrderCommand placeOrderCommand) {
-        // Set order details from command
+        // PlaceOrderCommand에서 전달받은 데이터를 통해 Order에 저장
         this.userId = placeOrderCommand.getUserId();
         this.orderDate= placeOrderCommand.getOrderDate();
         this.inventoryId = placeOrderCommand.getInventoryId();
