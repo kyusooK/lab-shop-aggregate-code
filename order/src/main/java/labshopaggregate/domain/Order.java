@@ -47,7 +47,7 @@ public class Order {
     public void placeOrder(PlaceOrderCommand placeOrderCommand) {
         // Set order details from command
         this.userId = placeOrderCommand.getUserId();
-        this.qty = placeOrderCommand.getQty();
+        this.orderDate= placeOrderCommand.getOrderDate();
         this.inventoryId = placeOrderCommand.getInventoryId();
         this.address = placeOrderCommand.getAddress();
         this.orderItems = placeOrderCommand.getOrderItems();
