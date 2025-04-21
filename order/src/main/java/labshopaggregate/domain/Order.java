@@ -26,14 +26,14 @@ public class Order {
     @Embedded
     private InventoryId inventoryId;
 
-    @Embedded
-    private OrderItem orderItems;
-
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
     @Embedded
     private Address address;
+
+    @ElementCollection
+    private List<OrderItem> orderItems;
 
     public static OrderRepository repository() {
         OrderRepository orderRepository = OrderApplication.applicationContext.getBean(

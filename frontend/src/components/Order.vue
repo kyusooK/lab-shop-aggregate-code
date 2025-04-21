@@ -10,17 +10,30 @@
             v-model="value.orderDate"
             :editMode="editMode"
         />
+        <div variant="outlined" class="my-2">
+            <OrderItems v-model="orderItemsInput"
+                offline
+                label="OrderItems"
+                :editMode="editMode"
+                @change="change"
+            />
+            <v-row class="ma-0 pa-0 mt-2">
+                <v-spacer></v-spacer>
+                <v-btn @click="addOrderItemsList">OrderItems Add</v-btn>
+            </v-row>
+            <v-card v-if="value.orderItems.length > 0" variant="outlined" class="pa-4 mt-2">
+                <v-card-sub-title>
+                    OrderItems List
+                </v-card-sub-title>
+                <li v-for="(id, index) in value.orderItems" :key="index">
+                    {{ id && id.productName ? id.productName : '' }}
+                </li>
+            </v-card>
+        </div>
         <InventoryId
             offline
             label="inventoryId"
             v-model="value.inventoryId"
-            :editMode="editMode"
-            @change="change"
-        />
-        <OrderItem
-            offline
-            label="orderItems"
-            v-model="value.orderItems"
             :editMode="editMode"
             @change="change"
         />
@@ -59,7 +72,9 @@ export default {
     
     data: () => ({
         path: "orders",
+        orderItemsInput: null,
         value: {
+            orderItems: [],
         }
     }),
     created(){
@@ -67,6 +82,12 @@ export default {
     computed:{
     },
     methods: {
+        addOrderItemsList() {
+            if (this.orderItemsInput !== null && this.orderItemsInput !== '') {
+                this.value.orderItems.push(this.orderItemsInput);
+                this.orderItemsInput = null; // null로 초기화
+            }
+        },
     },
 }
 </script>

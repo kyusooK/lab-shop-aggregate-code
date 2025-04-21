@@ -46,9 +46,9 @@
                         <th>UserId</th>
                         <th>OrderDate</th>
                         <th>inventoryId</th>
-                        <th>orderItems</th>
                         <th>OrderStatus</th>
                         <th>address</th>
+                        <th>OrderItems</th>
                         <th>Inventory</th>
                         </tr>
                     </thead>
@@ -76,6 +76,7 @@
                     </tbody>
                 </v-table>
             </div>
+            <OrderItemDetailGrid style="margin-top: 20px;" label="OrderItems" offline v-if="selectedRow" v-model="selectedRow.orderItems" :selectedRow="selectedRow"/>
         </div>
         <v-col>
             <v-dialog
@@ -132,9 +133,9 @@
                             <String label="UserId" v-model="selectedRow.userId" :editMode="true"/>
                             <Date label="OrderDate" v-model="selectedRow.orderDate" :editMode="true"/>
                             <InventoryId offline label="inventoryId" v-model="selectedRow.inventoryId" :editMode="true"/>
-                            <OrderItem offline label="orderItems" v-model="selectedRow.orderItems" :editMode="true"/>
                             <OrderStatus offline label="OrderStatus" v-model="selectedRow.orderStatus" :editMode="true"/>
                             <Address offline label="address" v-model="selectedRow.address" :editMode="true"/>
+                            <OrderItemDetailGrid label="OrderItems" offline v-model="selectedRow.orderItems" :editMode="true"/>
                             <v-divider class="border-opacity-100 my-divider"></v-divider>
                             <v-layout row justify-end>
                                 <v-btn

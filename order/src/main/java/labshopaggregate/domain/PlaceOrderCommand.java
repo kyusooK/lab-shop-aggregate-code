@@ -8,9 +8,9 @@ import lombok.Data;
 public class PlaceOrderCommand {
 
     private String userId;
-    private Integer qty;
+    private Date orderDate;
     private InventoryId inventoryId;
+    private OrderStatus orderStatus;
     private Address address;
     private List<OrderItem> orderItems;
-    private OrderStatus orderStatus;
 }
