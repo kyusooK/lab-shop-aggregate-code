@@ -22,19 +22,19 @@ public class Order {
 
     private String userId;
 
-    private Integer qty;
+    private Date orderDate;
 
     @Embedded
     private InventoryId inventoryId;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @Embedded
     private Address address;
 
     @ElementCollection
     private List<OrderItem> orderItems;
-
-    @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
 
     public static OrderRepository repository() {
         OrderRepository orderRepository = OrderApplication.applicationContext.getBean(

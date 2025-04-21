@@ -44,11 +44,11 @@
                         <tr>
                         <th>Id</th>
                         <th>UserId</th>
-                        <th>Qty</th>
+                        <th>OrderDate</th>
                         <th>inventoryId</th>
-                        <th>Address</th>
-                        <th>OrderItems</th>
                         <th>OrderStatus</th>
+                        <th>address</th>
+                        <th>OrderItems</th>
                         <th>Inventory</th>
                         </tr>
                     </thead>
@@ -60,11 +60,11 @@
                         >
                             <td class="font-semibold">{{ idx + 1 }}</td>
                             <td class="whitespace-nowrap" label="UserId">{{ val.userId }}</td>
-                            <td class="whitespace-nowrap" label="Qty">{{ val.qty }}</td>
-                            <td class="whitespace-nowrap" label="Address">
+                            <td class="whitespace-nowrap" label="OrderDate">{{ val.orderDate }}</td>
+                            <td class="whitespace-nowrap" label="OrderStatus">{{ val.orderStatus }}</td>
+                            <td class="whitespace-nowrap" label="address">
                                 <Address :editMode="false" :inList="true" v-model="val.address"></Address>
                             </td>
-                            <td class="whitespace-nowrap" label="OrderStatus">{{ val.orderStatus }}</td>
                             <td class="whitespace-nowrap" label="Inventory">
                                 <InventoryId :editMode="editMode" v-model="val.inventoryId"></InventoryId>
                             </td>
@@ -131,10 +131,10 @@
                     <v-card-text>
                         <div>
                             <String label="UserId" v-model="selectedRow.userId" :editMode="true"/>
-                            <Number label="Qty" v-model="selectedRow.qty" :editMode="true"/>
+                            <Date label="OrderDate" v-model="selectedRow.orderDate" :editMode="true"/>
                             <InventoryId offline label="inventoryId" v-model="selectedRow.inventoryId" :editMode="true"/>
-                            <Address offline label="Address" v-model="selectedRow.address" :editMode="true"/>
                             <OrderStatus offline label="OrderStatus" v-model="selectedRow.orderStatus" :editMode="true"/>
+                            <Address offline label="address" v-model="selectedRow.address" :editMode="true"/>
                             <OrderItemDetailGrid label="OrderItems" offline v-model="selectedRow.orderItems" :editMode="true"/>
                             <v-divider class="border-opacity-100 my-divider"></v-divider>
                             <v-layout row justify-end>

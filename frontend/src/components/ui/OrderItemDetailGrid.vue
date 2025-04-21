@@ -9,6 +9,7 @@
                     <tr>
                         <th>Id</th>
                         <th>price</th>
+                        <th>qty</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -16,6 +17,7 @@
                     <tr v-for="(detailVal, idx) in selectedRow.orderItems" :key="detailVal" >
                         <td class="font-semibold">{{ idx + 1 }}</td>
                         <td class="whitespace-nowrap">{{ detailVal.price }}</td>
+                        <td class="whitespace-nowrap">{{ detailVal.qty }}</td>
                         <td class="whitespace-nowrap">
                             <Icon icon="mi:delete" @click="deleteRow(detailVal)" />
                         </td>
@@ -27,6 +29,7 @@
                     <tr>
                         <th>Id</th>
                         <th>price</th>
+                        <th>qty</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,6 +37,9 @@
                         <td class="font-semibold">{{ idx + 1 }}</td>
                         <td class="whitespace-nowrap">
                             <Number style="margin-left: -5px; width: 150px;" :editMode="editMode" v-model="addVal.price"/>
+                        </td>
+                        <td class="whitespace-nowrap">
+                            <Number style="margin-left: -5px; width: 150px;" :editMode="editMode" v-model="addVal.qty"/>
                         </td>
                     </tr>
                 </tbody>

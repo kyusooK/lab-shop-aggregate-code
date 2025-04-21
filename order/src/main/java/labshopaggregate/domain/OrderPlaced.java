@@ -13,7 +13,11 @@ public class OrderPlaced extends AbstractEvent {
 
     private Long id;
     private String userId;
-    private Integer qty;
+    private Date orderDate;
+    private InventoryId inventoryId;
+    private OrderStatus orderStatus;
+    private Address address;
+    private List<OrderItem> orderItems;
 
     public OrderPlaced(Order aggregate) {
         super(aggregate);

@@ -7,11 +7,11 @@
 
         <v-card-text>
             <String label="UserId" v-model="value.userId" :editMode="editMode"/>
-            <Number label="Qty" v-model="value.qty" :editMode="editMode"/>
+            <Date label="OrderDate" v-model="value.orderDate" :editMode="editMode"/>
             <InventoryId offline label="InventoryId" v-model="value.inventoryId" :editMode="editMode" @change="change"/>
+            <OrderStatus offline label="OrderStatus" v-model="value.orderStatus" :editMode="editMode" @change="change"/>
             <Address offline label="Address" v-model="value.address" :editMode="editMode" @change="change"/>
             <OrderItemList offline label="OrderItems" v-model="value.orderItems" :editMode="editMode" @change="change"/>
-            <OrderStatus offline label="OrderStatus" v-model="value.orderStatus" :editMode="editMode" @change="change"/>
         </v-card-text>
 
         <v-card-actions>
@@ -49,11 +49,11 @@ export default {
     }),
     created() {
         this.value.userId = '';
-        this.value.qty = 0;
+        this.value.orderDate = '2025-04-21';
         this.value.inventoryId = {};
+        this.value.orderStatus = {};
         this.value.address = {};
         this.value.orderItems = [];
-        this.value.orderStatus = {};
     },
     watch: {
     },

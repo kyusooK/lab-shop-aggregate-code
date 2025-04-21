@@ -5,9 +5,9 @@
             v-model="value.userId"
             :editMode="editMode"
         />
-        <Number
-            label="Qty"
-            v-model="value.qty"
+        <Date
+            label="OrderDate"
+            v-model="value.orderDate"
             :editMode="editMode"
         />
         <div variant="outlined" class="my-2">
@@ -37,17 +37,17 @@
             :editMode="editMode"
             @change="change"
         />
-        <Address
-            offline
-            label="Address"
-            v-model="value.address"
-            :editMode="editMode"
-            @change="change"
-        />
         <OrderStatus
             offline
             label="OrderStatus"
             v-model="value.orderStatus"
+            :editMode="editMode"
+            @change="change"
+        />
+        <Address
+            offline
+            label="address"
+            v-model="value.address"
             :editMode="editMode"
             @change="change"
         />

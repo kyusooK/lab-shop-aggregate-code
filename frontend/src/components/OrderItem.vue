@@ -7,6 +7,7 @@
         <v-col>
             <String label="ProductName" v-model="value.productName" :editMode="editMode"/>
             <Number label="Price" v-model="value.price" :editMode="editMode"/>
+            <Number label="Qty" v-model="value.qty" :editMode="editMode"/>
         </v-col>
 
         <v-card-actions v-if="inList">
