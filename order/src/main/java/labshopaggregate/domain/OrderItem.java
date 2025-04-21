@@ -18,5 +18,7 @@ public class OrderItem {
     private String productName;
 
     private Double price;
+
+    private Integer qty;
 }
 //>>> DDD / Value Object
